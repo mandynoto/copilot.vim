@@ -119,6 +119,7 @@ function! copilot#Clear() abort
   endif
   call s:UpdatePreview()
   unlet! b:_copilot
+  let g:copilot_suggestion_shown = 0
   return ''
 endfunction
 
@@ -397,6 +398,7 @@ function! s:UpdatePreview() abort
     endif
     if uuid !=# get(s:, 'uuid', '')
       let s:uuid = uuid
+      let g:copilot_suggestion_shown = 1
       call copilot#Request('notifyShown', {'uuid': uuid})
     endif
   catch
